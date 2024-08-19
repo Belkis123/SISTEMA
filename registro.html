@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Sistema de Matrícula en Línea</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>REGISTRO DE MATRÍCULA</h2>
+            <form id="registro-form">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="identidad">Identidad:</label>
+                <input type="text" id="identidad" name="identidad" required>
+
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" required>
+
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('registro-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            
+            // Obtener los datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const identidad = document.getElementById('identidad').value;
+            const correo = document.getElementById('correo').value;
+            const sexo = document.getElementById('sexo').value;
+            const ciudad = document.getElementById('ciudad').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            // Guardar en localStorage
+            localStorage.setItem('estudiante', JSON.stringify({
+                nombre,
+                identidad,
+                correo,
+                sexo,
+                ciudad,
+                contrasena
+            }));
+
+            // Mostrar una ventana emergente de confirmación
+            alert('Datos agregados correctamente.');
+            // Redirigir a la página de resumen de matrícula
+            window.location.href = 'resumen_matricula.html';
+        });
+    </script>
+</body>
+</html>

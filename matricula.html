@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matricula - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Carreras Disponibles</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Matricula</h2>
+            <p>Aquí puedes seleccionar una carrera, jornada y año escolar para matricularte:</p>
+            <form id="matricula-form">
+                <label for="carrera">Selecciona una Carrera:</label>
+                <select id="carrera" name="carrera" required>
+                    <option value="" disabled selected>Elige una carrera</option>
+                    <option value="informatica">Informática</option>
+                    <option value="ciencias_humanidades">Ciencias y Humanidades</option>
+                    <option value="contaduria">Contaduría</option>
+                    <!-- Agrega más carreras según sea necesario -->
+                </select>
+
+                <label for="jornada">Selecciona una Jornada:</label>
+                <select id="jornada" name="jornada" required>
+                    <option value="" disabled selected>Elige una jornada</option>
+                    <option value="matutina">Matutina</option>
+                    <option value="vespertina">Vespertina</option>
+                    <option value="nocturna">Nocturna</option>
+                </select>
+
+                <label for="ano_escolar">Selecciona un Año Escolar:</label>
+                <select id="ano_escolar" name="ano_escolar" required>
+                    <option value="" disabled selected>Elige un año escolar</option>
+                    <option value="primer_ano">Primer Año</option>
+                    <option value="segundo_ano">Segundo Año</option>
+                    <option value="tercer_ano">Tercer Año</option>
+                </select>
+
+                <button type="submit">Ver Clases Disponibles</button>
+            </form>
+            <div id="clases-info"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('matricula-form');
+            const clasesInfo = document.getElementById('clases-info');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const carrera = document.getElementById('carrera').value;
+                const jornada = document.getElementById('jornada').value;
+                const anoEscolar = document.getElementById('ano_escolar').value;
+
+                if (!carrera || !jornada || !anoEscolar) {
+                    alert('Por favor selecciona todos los campos.');
+                    return;
+                }
+
+                let clasesHtml = '';
+                if (carrera === 'informatica') {
+                    clasesHtml = `
+                        <h3>Clases Disponibles - Informática (${jornada}, ${anoEscolar.replace('_', ' ')})</h3>
+                        <form id="matricular-clases">
+                            <div>
+                                <input type="checkbox" id="programacion" name="clases" value="Programación">
+                                <label for="programacion">Programación - Lunes 9:00 - 11:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="redes" name="clases" value="Redes">
+                                <label for="redes">Redes - Martes 11:00 - 13:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="bases_datos" name="clases" value="Bases de Datos">
+                                <label for="bases_datos">Bases de Datos - Miércoles 14:00 - 16:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="seguridad" name="clases" value="Seguridad Informática">
+                                <label for="seguridad">Seguridad Informática - Jueves 10:00 - 12:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="desarrollo_web" name="clases" value="Desarrollo Web">
+                                <label for="desarrollo_web">Desarrollo Web - Viernes 8:00 - 10:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="sistemas_operativos" name="clases" value="Sistemas Operativos">
+                                <label for="sistemas_operativos">Sistemas Operativos - Viernes 14:00 - 16:00</label>
+                            </div>
+                            <button type="submit">Matricular Selección</button>
+                        </form>
+                    `;
+                } else if (carrera === 'ciencias_humanidades') {
+                    clasesHtml = `
+                        <h3>Clases Disponibles - Ciencias y Humanidades (${jornada}, ${anoEscolar.replace('_', ' ')})</h3>
+                        <form id="matricular-clases">
+                            <div>
+                                <input type="checkbox" id="literatura" name="clases" value="Literatura">
+                                <label for="literatura">Literatura - Lunes 10:00 - 12:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="filosofia" name="clases" value="Filosofía">
+                                <label for="filosofia">Filosofía - Martes 13:00 - 15:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="psicologia" name="clases" value="Psicología">
+                                <label for="psicologia">Psicología - Miércoles 9:00 - 11:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="historia" name="clases" value="Historia Universal">
+                                <label for="historia">Historia Universal - Jueves 14:00 - 16:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="sociologia" name="clases" value="Sociología">
+                                <label for="sociologia">Sociología - Viernes 8:00 - 10:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="antropologia" name="clases" value="Antropología">
+                                <label for="antropologia">Antropología - Viernes 12:00 - 14:00</label>
+                            </div>
+                            <button type="submit">Matricular Selección</button>
+                        </form>
+                    `;
+                } else if (carrera === 'contaduria') {
+                    clasesHtml = `
+                        <h3>Clases Disponibles - Contaduría (${jornada}, ${anoEscolar.replace('_', ' ')})</h3>
+                        <form id="matricular-clases">
+                            <div>
+                                <input type="checkbox" id="contabilidad" name="clases" value="Contabilidad General">
+                                <label for="contabilidad">Contabilidad General - Lunes 8:00 - 10:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="costos" name="clases" value="Contabilidad de Costos">
+                                <label for="costos">Contabilidad de Costos - Martes 10:00 - 12:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="auditoria" name="clases" value="Auditoría">
+                                <label for="auditoria">Auditoría - Miércoles 11:00 - 13:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="fiscal" name="clases" value="Contabilidad Fiscal">
+                                <label for="fiscal">Contabilidad Fiscal - Jueves 15:00 - 17:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="finanzas" name="clases" value="Finanzas Corporativas">
+                                <label for="finanzas">Finanzas Corporativas - Viernes 9:00 - 11:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="administracion" name="clases" value="Administración Financiera">
+                                <label for="administracion">Administración Financiera - Viernes 14:00 - 16:00</label>
+                            </div>
+                            <button type="submit">Matricular Selección</button>
+                        </form>
+                    `;
+                }
+
+                clasesInfo.innerHTML = clasesHtml;
+
+                document.getElementById('matricular-clases').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const selectedClasses = Array.from(document.querySelectorAll('input[name="clases"]:checked')).map(checkbox => checkbox.value);
+                    if (selectedClasses.length > 0) {
+                        if (confirm('¡Clases matriculadas con éxito! ¿Deseas proceder al resumen de matrícula?')) {
+                            const params = new URLSearchParams({
+                                carrera: carrera,
+                                jornada: jornada,
+                                ano_escolar: anoEscolar,
+                                clases: selectedClasses.join(',')
+                            }).toString();
+                            window.location.href = `resumen_matricula.html?${params}`;
+                        }
+                    } else {
+                        alert('Por favor selecciona al menos una clase.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

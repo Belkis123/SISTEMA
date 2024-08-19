@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago de Matrícula - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Pago de Matrícula</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Resumen de Matrícula</h2>
+            <p>La información de tu matrícula es la siguiente:</p>
+            <div id="resumen-info">
+                <!-- Aquí se mostrará el resumen de la matrícula -->
+            </div>
+            <form id="pago-form">
+                <label for="monto">Monto a Pagar:</label>
+                <input type="text" id="monto" name="monto" value="500" readonly> <!-- Monto ejemplo -->
+
+                <button type="submit">Pagar Matrícula</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aquí podrías recuperar y mostrar los datos de matrícula
+            const resumenInfo = document.getElementById('resumen-info');
+            resumenInfo.innerHTML = 'Carrera: Informática<br>Jornada: Matutina<br>Año Escolar: Primer Año<br>Clases: Programación, Redes, Bases de Datos'; // Datos de ejemplo
+
+            document.getElementById('pago-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                alert('Pago realizado con éxito.');
+                window.location.href = 'index.html'; // Redirige a la página principal o donde consideres adecuado
+            });
+        });
+    </script>
+</body>
+</html>

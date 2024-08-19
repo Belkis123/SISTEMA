@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Docente - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilo para el modal */
+        .modal {
+            display: none; /* Oculta el modal por defecto */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Información del Docente</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="info-section">
+            <h2>Detalles del Docente</h2>
+            <p><strong>Docente:</strong> <span id="nombre-docente"></span></p>
+            <p><strong>Correo:</strong> <span id="correo-docente"></span></p>
+            <p><strong>Clases Asignadas:</strong> <span id="clases-docente"></span></p>
+            <button id="register-grades">Registrar Notas</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modal para registrar notas -->
+    <div id="grades-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registrar Notas</h2>
+            <form id="grades-form">
+                <label for="estudiante">Nombre del Estudiante:</label>
+                <select id="estudiante" name="estudiante" required>
+                    <option value="">Seleccione un estudiante</option>
+                    <!-- Opciones se llenarán con JavaScript -->
+                </select>
+
+                <label for="clase">Clase:</label>
+                <select id="clase" name="clase" required>
+                    <option value="">Seleccione una clase</option>
+                    <!-- Opciones se llenarán con JavaScript -->
+                </select>
+
+                <label for="nota">Nota:</label>
+                <input type="number" id="nota" name="nota" min="0" max="100" required>
+
+                <button type="submit">Guardar Nota</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar los datos del docente desde localStorage
+            const docente = JSON.parse(localStorage.getItem('docente'));
+            const estudiantes = JSON.parse(localStorage.getItem('estudiantes'));
+            const clases = JSON.parse(localStorage.getItem('clases')); // Cargar las clases desde localStorage
+
+            if (docente) {
+                document.getElementById('nombre-docente').textContent = docente.nombre || 'No disponible';
+                document.getElementById('correo-docente').textContent = docente.correo || 'No disponible';
+                document.getElementById('clases-docente').textContent = docente.clases ? docente.clases.join(', ') : 'No disponible';
+            } else {
+                alert('No se encontraron datos del docente.');
+            }
+
+            // Llenar la lista de estudiantes
+            const estudianteSelect = document.getElementById('estudiante');
+            if (estudiantes) {
+                estudiantes.forEach(estudiante => {
+                    const option = document.createElement('option');
+                    option.value = estudiante.id;
+                    option.textContent = estudiante.nombre;
+                    estudianteSelect.appendChild(option);
+                });
+            }
+
+            // Llenar la lista de clases
+            const claseSelect = document.getElementById('clase');
+            if (clases) {
+                clases.forEach(clase => {
+                    const option = document.createElement('option');
+                    option.value = clase.id;
+                    option.textContent = clase.nombre;
+                    claseSelect.appendChild(option);
+                });
+            }
+
+            // Modal de registrar notas
+            const modal = document.getElementById('grades-modal');
+            const btn = document.getElementById('register-grades');
+            const span = document.getElementsByClassName('close')[0];
+
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            document.getElementById('grades-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Obtener los datos del formulario de notas
+                const estudianteId = document.getElementById('estudiante').value;
+                const claseId = document.getElementById('clase').value;
+                const nota = document.getElementById('nota').value;
+
+                // Aquí puedes agregar la lógica para guardar la nota (por ejemplo, enviarla a un servidor)
+                alert(`Nota registrada para estudiante ID ${estudianteId} en clase ID ${claseId}: ${nota}`);
+
+                // Cerrar el modal después de guardar la nota
+                modal.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

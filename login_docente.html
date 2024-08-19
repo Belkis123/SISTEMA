@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Docente - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>INSTITUTO DESPERTAR YOREÑO</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Iniciar Sesión para Docentes</h2>
+            <form id="login-docente-form">
+                <div class="form-group">
+                    <label for="usuario-docente"><i class="fas fa-user"></i> Nombre de Usuario:</label>
+                    <input type="text" id="usuario-docente" name="usuario-docente" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena-docente"><i class="fas fa-lock"></i> Contraseña:</label>
+                    <input type="password" id="contrasena-docente" name="contrasena-docente" required>
+                </div>
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('login-docente-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Obtener los datos del formulario
+            const usuarioDocente = document.getElementById('usuario-docente').value;
+            const contrasenaDocente = document.getElementById('contrasena-docente').value;
+
+            // Obtener datos almacenados en localStorage
+            const docente = JSON.parse(localStorage.getItem('docente'));
+
+            // Validar usuario y contraseña
+            if (docente && docente.usuario === usuarioDocente && docente.contrasena === contrasenaDocente) {
+                window.location.href = 'info_docente.html'; // Redirige a la página de información del docente
+            } else {
+                alert('Nombre de usuario o contraseña incorrectos.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Pago - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>INSTITUTO DESPERTAR YOREÑO</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2><i class="fas fa-shopping-cart"></i> Iniciar Sesión para Pago</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="usuario"><i class="fas fa-envelope"></i> Correo Electrónico:</label>
+                    <input type="email" id="usuario" name="usuario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena"><i class="fas fa-lock"></i> Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                </div>
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Obtener los datos ingresados por el usuario
+            const usuario = document.getElementById('usuario').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            // Obtener los datos del usuario almacenados en localStorage
+            const estudiante = JSON.parse(localStorage.getItem('estudiante'));
+
+            // Verificar las credenciales
+            if (estudiante && estudiante.correo === usuario && estudiante.contrasena === contrasena) {
+                window.location.href = 'pago_matricula.html'; // Redirige a la página de pago de matrícula
+            } else {
+                alert('Correo electrónico o contraseña incorrectos.');
+            }
+        });
+    </script>
+</body>
+</html>

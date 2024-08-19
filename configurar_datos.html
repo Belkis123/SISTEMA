@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Datos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function agregarDocente() {
+            localStorage.setItem('docente', JSON.stringify({
+                nombre: 'Juan Pérez',
+                correo: 'juan.perez@ejemplo.com',
+                telefono: '123456789',
+                usuario: 'juanperez',
+                contrasena: 'contrasena123',
+                clases: ['Matemáticas', 'Física']
+            }));
+            alert('Datos del docente agregados.');
+        }
+    </script>
+</head>
+<body>
+    <h1>Configurar Datos de Docente</h1>
+    <button onclick="agregarDocente()">Agregar Datos de Docente</button>
+</body>
+</html>

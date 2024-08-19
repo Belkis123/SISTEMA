@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Estudiante - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Perfil Estudiante</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Información del Estudiante</h2>
+            <div id="perfil-info"></div>
+            <div class="options">
+                <a href="matricula.html" class="button">Ver Carreras Disponibles</a>
+                <a href="historial.html" class="button">Ver Historial</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener los datos almacenados
+            const estudiante = JSON.parse(localStorage.getItem('estudiante'));
+
+            if (estudiante) {
+                // Mostrar la información del estudiante
+                const perfilInfo = document.getElementById('perfil-info');
+                perfilInfo.innerHTML = `
+                    <p><strong>Nombre Completo:</strong> ${estudiante.nombre}</p>
+                    <p><strong>Identidad:</strong> ${estudiante.identidad}</p>
+                    <p><strong>Correo Electrónico:</strong> ${estudiante.correo}</p>
+                    <p><strong>Sexo:</strong> ${estudiante.sexo}</p>
+                    <p><strong>Ciudad:</strong> ${estudiante.ciudad}</p>
+                `;
+            } else {
+                // Redirigir a la página de inicio si no hay datos
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

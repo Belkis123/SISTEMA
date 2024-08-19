@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Historial del Estudiante</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Historial</h2>
+            <p>Aquí puedes ver el historial de matricula del estudiante:</p>
+            <ul id="historial-list">
+                <!-- El historial se llenará dinámicamente -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener los datos almacenados
+            const estudiante = JSON.parse(localStorage.getItem('estudiante'));
+
+            if (estudiante) {
+                // Para demostrar, añadimos un historial ficticio
+                // En una aplicación real, estos datos provendrían de una base de datos
+                const historialList = document.getElementById('historial-list');
+                historialList.innerHTML = `
+                    <li>Carrera de Ingeniería en Sistemas - 2024</li>
+                    <li>Carrera de Medicina - 2023</li>
+                    <!-- Agrega más historial según sea necesario -->
+                `;
+            } else {
+                // Redirigir a la página de inicio si no hay datos
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

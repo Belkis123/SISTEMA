@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Matrícula - Sistema de Matrícula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="IT.PNG" alt="Logo del Instituto Despertar Yoreño" class="logo">
+        <h1>Resumen de Matrícula</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+                <li><a href="login_docente.html">Docentes</a></li>
+                <li><a href="pagos.html">Pagos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="summary-section">
+            <h2>Resumen de Matrícula</h2>
+            <div id="matricula-resumen"></div>
+            <a href="pagos.html" class="btn-proceder-pago">Proceder al Pago</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Instituto Despertar Yoreño. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const carrera = params.get('carrera');
+            const jornada = params.get('jornada');
+            const anoEscolar = params.get('ano_escolar');
+            const clases = params.get('clases');
+
+            const resumenDiv = document.getElementById('matricula-resumen');
+
+            if (carrera && jornada && anoEscolar && clases) {
+                const clasesArray = clases.split(',');
+                resumenDiv.innerHTML = `
+                    <p><strong>Carrera:</strong> ${carrera.replace('_', ' ')}</p>
+                    <p><strong>Jornada:</strong> ${jornada}</p>
+                    <p><strong>Año Escolar:</strong> ${anoEscolar.replace('_', ' ')}</p>
+                    <p><strong>Clases Seleccionadas:</strong></p>
+                    <ul>
+                        ${clasesArray.map(clase => `<li>${clase}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                resumenDiv.innerHTML = '<p>No se encontraron datos de matrícula.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
